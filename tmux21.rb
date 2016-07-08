@@ -1,4 +1,4 @@
-class Tmux < Formula
+class Tmux21 < Formula
   desc "Terminal multiplexer"
   homepage "https://tmux.github.io/"
 
@@ -19,14 +19,6 @@ class Tmux < Formula
       url "https://github.com/tmux/tmux/commit/3ebcf25149d75977ea97e9d4f786e0508d1a0d5e.diff"
       sha256 "65a8bc0b2f6a8b41ad27605fd99419fff36314499969adc9d17dd3940a173508"
     end
-  end
-
-  bottle do
-    cellar :any
-    revision 2
-    sha256 "815920cd38a8102360f7d667271d9c724f41087dd79be433db29259390ef8011" => :el_capitan
-    sha256 "93e2156c3c7e1c9f3f4b86dd84617e7519e9bee630f1e8769e00a91aa341d274" => :yosemite
-    sha256 "03c4ca001f72a1623393c0ec9406dfd82b7e449d745762a6e761da6a95d0fbd9" => :mavericks
   end
 
   head do
@@ -66,5 +58,12 @@ class Tmux < Formula
 
   test do
     system "#{bin}/tmux", "-V"
+  end
+
+  def patches
+    [
+      "https://gist.githubusercontent.com/waltarix/1399751/raw/8c5f0018c901f151d39680ef85de6d22649b687a/tmux-ambiguous-width-cjk.patch",
+      "https://gist.githubusercontent.com/waltarix/1399751/raw/dc11f40266d9371e730eff41c64a70c84d34484a/tmux-pane-border-ascii.patch"
+    ]
   end
 end
